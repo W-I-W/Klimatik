@@ -597,7 +597,7 @@
         <label>Комментарий</label>
         <textarea placeholder="Опишите задачу..."></textarea>
       </div>
-      <button class="btn-primary" onclick="handleSubmit()" style="width:100%;font-size:0.95rem;">Отправить заявку</button>
+      <button class="btn-primary" onclick="sendToWhatsApp()" style="width:100%;font-size:0.95rem;">Отправить заявку</button>
     </div>
   </div>
 </section>
@@ -621,14 +621,25 @@
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  function handleSubmit() {
-    const btn = event.target;
-    btn.textContent = '✓ Заявка отправлена!';
-    btn.style.background = '#2a7a2a';
-    setTimeout(() => {
-      btn.textContent = 'Отправить заявку';
-      btn.style.background = '';
-    }, 3000);
+  function sendToWhatsApp() {
+    const name = document.querySelector('input[type="text"]').value.trim();
+    const phone = document.querySelector('input[type="tel"]').value.trim();
+    const service = document.querySelector('select').value;
+    const comment = document.querySelector('textarea').value.trim();
+
+    if (!name || !phone) {
+      alert('Пожалуйста, укажите имя и телефон.');
+      return;
+    }
+
+    let msg = '📋 *Новая заявка с сайта*\n\n';
+    msg += `👤 *Имя:* ${name}\n`;
+    msg += `📞 *Телефон:* ${phone}\n`;
+    if (service) msg += `🔧 *Услуга:* ${service}\n`;
+    if (comment) msg += `💬 *Комментарий:* ${comment}\n`;
+
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://wa.me/87023522078?text=${encoded}`, '_blank');
   }
 </script>
 
