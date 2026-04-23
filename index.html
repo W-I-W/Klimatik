@@ -361,7 +361,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Klima<span>tik</span></div>
-  <a href="tel:+77023522078" class="nav-phone">
+  <a href="tel:+87023522078" class="nav-phone">
     <div class="nav-phone-icon">📞</div>
     <span>8 702 352-20-78</span>
   </a>
@@ -405,49 +405,49 @@
       <span class="service-icon">🔥</span>
       <div class="service-name">Установка котла</div>
       <div class="service-desc">Профессиональный монтаж газовых котлов любых марок. Подключение к системе отопления, газовой магистрали, настройка и пробный запуск.</div>
-      <div class="service-price">от 15 000 ₸</div>
+      <div class="service-price" data-price-id="boiler-install">от 15 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🔧</span>
       <div class="service-name">Ремонт котла</div>
       <div class="service-desc">Диагностика и устранение любых неисправностей газовых котлов. Замена горелок, теплообменников, датчиков и других деталей.</div>
-      <div class="service-price">от 5 000 ₸</div>
+      <div class="service-price" data-price-id="boiler-repair">от 5 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🧹</span>
       <div class="service-name">Чистка котла</div>
       <div class="service-desc">Промывка теплообменника, чистка горелки и камеры сгорания. Повышает КПД, снижает расход газа и продлевает срок службы котла.</div>
-      <div class="service-price">от 6 000 ₸</div>
+      <div class="service-price" data-price-id="boiler-clean">от 6 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🏗️</span>
       <div class="service-name">Демонтаж котла</div>
       <div class="service-desc">Аккуратный демонтаж старого котла с отключением от газовой и водяной магистралей. Подготовка места под новое оборудование.</div>
-      <div class="service-price">от 4 000 ₸</div>
+      <div class="service-price" data-price-id="boiler-remove">от 4 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">❄️</span>
       <div class="service-name">Установка кондиционера</div>
       <div class="service-desc">Монтаж сплит-систем любой мощности. Прокладка трасс, крепление блоков, вакуумирование и заправка фреоном, пусконаладка.</div>
-      <div class="service-price">от 12 000 ₸</div>
+      <div class="service-price" data-price-id="ac-install">от 12 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🛠️</span>
       <div class="service-name">Ремонт кондиционера</div>
       <div class="service-desc">Диагностика и ремонт сплит-систем: замена компрессора, платы управления, заправка фреоном, устранение утечек и других неисправностей.</div>
-      <div class="service-price">от 5 000 ₸</div>
+      <div class="service-price" data-price-id="ac-repair">от 5 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">🫧</span>
       <div class="service-name">Чистка кондиционера</div>
       <div class="service-desc">Глубокая чистка внутреннего и внешнего блока, промывка испарителя, дезинфекция. Восстанавливает производительность и качество воздуха.</div>
-      <div class="service-price">от 4 000 ₸</div>
+      <div class="service-price" data-price-id="ac-clean">от 4 000 ₸</div>
     </div>
     <div class="service-card fade-in">
       <span class="service-icon">📦</span>
       <div class="service-name">Демонтаж кондиционера</div>
       <div class="service-desc">Снятие внутреннего и наружного блока с откачкой фреона. Аккуратный демонтаж без повреждений стен и оборудования.</div>
-      <div class="service-price">от 5 000 ₸</div>
+      <div class="service-price" data-price-id="ac-remove">от 5 000 ₸</div>
     </div>
   </div>
 </section>
@@ -527,7 +527,7 @@
 <!-- CTA BAND -->
 <div class="cta-band">
   <h2>НУЖНА СРОЧНАЯ<br>ПОМОЩЬ МАСТЕРА?</h2>
-  <a href="tel:+77023522078" class="btn-dark">📞 Позвонить сейчас</a>
+  <a href="tel:+87023522078" class="btn-dark">📞 Позвонить сейчас</a>
 </div>
 
 <!-- CONTACTS -->
@@ -540,14 +540,14 @@
         <div class="contact-icon">📞</div>
         <div>
           <div class="contact-label">Телефон</div>
-          <div class="contact-value"><a href="tel:+77023522078">8 702 352-20-78</a></div>
+          <div class="contact-value"><a href="tel:+87023522078">8 702 352-20-78</a></div>
         </div>
       </div>
       <div class="contact-item fade-in">
         <div class="contact-icon">💬</div>
         <div>
           <div class="contact-label">WhatsApp / Telegram</div>
-          <div class="contact-value"><a href="https://wa.me/77023522078">8 702 352-20-78</a></div>
+          <div class="contact-value"><a href="https://wa.me/87023522078">8 702 352-20-78</a></div>
         </div>
       </div>
       <div class="contact-item fade-in">
@@ -607,6 +607,18 @@
 </footer>
 
 <script>
+  // Load prices from localStorage (set by admin panel)
+  (function() {
+    const saved = localStorage.getItem('klimatik_prices');
+    if (saved) {
+      const prices = JSON.parse(saved);
+      document.querySelectorAll('[data-price-id]').forEach(el => {
+        const id = el.getAttribute('data-price-id');
+        if (prices[id]) el.textContent = prices[id];
+      });
+    }
+  })();
+
   // Intersection Observer for fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -637,7 +649,7 @@
     if (comment) msg += `💬 *Комментарий:* ${comment}\n`;
 
     const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/77023522078?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/87023522078?text=${encoded}`, '_blank');
   }
 </script>
 
