@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МастерКом — Ремонт и Установка</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fire: #FF4D00;
+    --fire-light: #FF7A30;
+    --dark: #0E0E0E;
+    --dark2: #161616;
+    --dark3: #1F1F1F;
+    --mid: #2A2A2A;
+    --text: #F0EDE8;
+    --muted: #888;
+    --accent: #FFB347;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,77,0,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: var(--fire);
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-phone {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-weight: 700; font-size: 1.05rem;
+    transition: color 0.2s;
+  }
+  .nav-phone:hover { color: var(--fire); }
+  .nav-phone-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--fire);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,77,0,0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(255,77,0,0); }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 75% 50%, rgba(255,77,0,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(255,115,48,0.07) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,77,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,77,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 700px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,77,0,0.15);
+    border: 1px solid rgba(255,77,0,0.4);
+    color: var(--fire-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+  }
+  h1 .fire { color: var(--fire); }
+  .hero-desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #B0A99E;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--fire);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--fire-light); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-block;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--fire); color: var(--fire); }
+  .hero-stats {
+    position: absolute; right: 5%; bottom: 60px;
+    display: flex; flex-direction: column; gap: 20px;
+    text-align: right;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--fire);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SECTION */
+  section { padding: 90px 5%; }
+  .section-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 50px;
+  }
+
+  /* SERVICES */
+  #services { background: var(--dark2); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--dark3);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--fire);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { background: var(--mid); }
+  .service-card:hover::before { transform: scaleY(1); }
+  .service-icon {
+    font-size: 2.8rem;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+  .service-price {
+    margin-top: 18px;
+    font-weight: 700;
+    color: var(--fire-light);
+    font-size: 0.9rem;
+  }
+
+  /* WHY */
+  #why { background: var(--dark); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+  }
+  .why-item { display: flex; gap: 16px; align-items: flex-start; }
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--fire);
+    line-height: 1;
+    min-width: 48px;
+  }
+  .why-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+  .why-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* HOW */
+  #how { background: var(--dark2); }
+  .steps { display: flex; flex-direction: column; gap: 0; max-width: 700px; }
+  .step { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .step:last-child { border-bottom: none; }
+  .step-circle {
+    min-width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--fire);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--fire);
+  }
+  .step-title { font-weight: 700; margin-bottom: 6px; }
+  .step-text { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+
+  /* CTA BAND */
+  .cta-band {
+    background: var(--fire);
+    padding: 60px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 30px;
+  }
+  .cta-band h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .btn-dark {
+    display: inline-block;
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+    border: none; cursor: pointer; white-space: nowrap;
+  }
+  .btn-dark:hover { background: #111; }
+
+  /* CONTACTS */
+  #contacts { background: var(--dark); }
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media(max-width:700px){ .contacts-grid { grid-template-columns: 1fr; } }
+  .contact-item { display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start; }
+  .contact-icon {
+    min-width: 44px; height: 44px;
+    background: rgba(255,77,0,0.12);
+    border: 1px solid rgba(255,77,0,0.3);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .contact-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .contact-value { font-weight: 700; font-size: 1.05rem; }
+  .contact-value a { color: var(--text); text-decoration: none; }
+  .contact-value a:hover { color: var(--fire); }
+
+  /* FORM */
+  .form-group { margin-bottom: 18px; }
+  label { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
+  input, textarea, select {
+    width: 100%;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    padding: 14px 16px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--fire); }
+  textarea { resize: vertical; min-height: 100px; }
+  select option { background: var(--dark3); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark2);
+    padding: 30px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--fire);
+  }
+  .footer-logo span { color: var(--muted); }
+  .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+  /* Animations */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media(max-width:768px) {
+    .hero-stats { display: none; }
+    .nav-phone span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Мастер<span>Ком</span></div>
+  <a href="tel:+87023522078" class="nav-phone">
+    <div class="nav-phone-icon">📞</div>
+    <span>8 702 352-20-78</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade-in visible">
+    <div class="hero-badge">⚡ Выезд в день обращения</div>
+    <h1>РЕМОНТ<br>&amp; <span class="fire">МОНТАЖ</span><br>ПОД КЛЮЧ</h1>
+    <p class="hero-desc">Газовые котлы, печи, кондиционеры и любые бытовые работы. Быстро, надёжно, с гарантией. Работаем по всему городу.</p>
+    <div class="hero-cta">
+      <a href="#contacts" class="btn-primary">Вызвать мастера</a>
+      <a href="#services" class="btn-secondary">Услуги и цены</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Лет опыта</div>
+    </div>
+    <div>
+      <div class="stat-num">3K+</div>
+      <div class="stat-label">Выполненных заказов</div>
+    </div>
+    <div>
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Аварийный выезд</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag">Что мы делаем</div>
+  <div class="section-title">НАШИ УСЛУГИ</div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <span class="service-icon">🔥</span>
+      <div class="service-name">Газовые котлы</div>
+      <div class="service-desc">Установка, подключение, настройка и ремонт газовых котлов любых марок. Замена деталей, чистка теплообменника, устранение неисправностей.</div>
+      <div class="service-price">от 5 000 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">🪵</span>
+      <div class="service-name">Печи и камины</div>
+      <div class="service-desc">Монтаж, кладка и ремонт печей. Чистка дымохода, замена огнеупорных элементов, устранение трещин и задымления.</div>
+      <div class="service-price">от 8 000 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">❄️</span>
+      <div class="service-name">Кондиционеры</div>
+      <div class="service-desc">Установка и монтаж сплит-систем, чистка и обслуживание, заправка фреоном, ремонт компрессора и других узлов.</div>
+      <div class="service-price">от 6 000 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">💧</span>
+      <div class="service-name">Сантехника</div>
+      <div class="service-desc">Установка смесителей, унитазов, ванн и душевых. Замена труб, устранение протечек, монтаж водонагревателей.</div>
+      <div class="service-price">от 2 500 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">⚡</span>
+      <div class="service-name">Электрика</div>
+      <div class="service-desc">Замена розеток, выключателей, монтаж освещения, замена проводки, установка распределительных щитков.</div>
+      <div class="service-price">от 2 000 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">🔧</span>
+      <div class="service-name">Муж на час</div>
+      <div class="service-desc">Сборка мебели, крепление полок и карнизов, установка дверей, монтаж карнизов, повеска картин и любые мелкие работы по дому.</div>
+      <div class="service-price">от 3 000 ₸ / час</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">🌡️</span>
+      <div class="service-name">Отопление</div>
+      <div class="service-desc">Монтаж и ремонт систем отопления, замена радиаторов, балансировка, промывка и опрессовка системы.</div>
+      <div class="service-price">от 4 000 ₸</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-icon">🚪</span>
+      <div class="service-name">Двери и окна</div>
+      <div class="service-desc">Установка и регулировка дверей, замена замков, ремонт фурнитуры ПВХ-окон, замена уплотнителей и ручек.</div>
+      <div class="service-price">от 3 500 ₸</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-tag">Почему мы</div>
+  <div class="section-title">НАШИ ПРЕИМУЩЕСТВА</div>
+  <div class="why-grid">
+    <div class="why-item fade-in">
+      <div class="why-num">01</div>
+      <div>
+        <div class="why-title">Гарантия на работы</div>
+        <div class="why-text">Даём письменную гарантию от 6 до 24 месяцев на все выполненные работы и установленное оборудование.</div>
+      </div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-num">02</div>
+      <div>
+        <div class="why-title">Выезд в день звонка</div>
+        <div class="why-text">Приедем в удобное для вас время. Аварийные ситуации — круглосуточно, 7 дней в неделю.</div>
+      </div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-num">03</div>
+      <div>
+        <div class="why-title">Фиксированные цены</div>
+        <div class="why-text">Стоимость работ оговаривается до начала. Никаких скрытых доплат и неприятных сюрпризов по итогу.</div>
+      </div>
+    </div>
+    <div class="why-item fade-in">
+      <div class="why-num">04</div>
+      <div>
+        <div class="why-title">Опытные мастера</div>
+        <div class="why-text">Все специалисты с профильным образованием, аттестованы и имеют допуски к газовому оборудованию.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="section-tag">Процесс работы</div>
+  <div class="section-title">КАК МЫ РАБОТАЕМ</div>
+  <div class="steps">
+    <div class="step fade-in">
+      <div class="step-circle">1</div>
+      <div>
+        <div class="step-title">Заявка и консультация</div>
+        <div class="step-text">Позвоните или оставьте заявку онлайн. Мастер проконсультирует, уточнит задачу и согласует удобное время визита.</div>
+      </div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-circle">2</div>
+      <div>
+        <div class="step-title">Осмотр и оценка</div>
+        <div class="step-text">На месте мастер осматривает объект, озвучивает точную стоимость. Выезд и диагностика — бесплатно при заказе работ.</div>
+      </div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-circle">3</div>
+      <div>
+        <div class="step-title">Выполнение работ</div>
+        <div class="step-text">Работаем аккуратно, используем только качественные материалы. Убираем за собой — оставим порядок в вашем доме.</div>
+      </div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-circle">4</div>
+      <div>
+        <div class="step-title">Сдача и гарантия</div>
+        <div class="step-text">Проверяем результат вместе с вами. Выдаём документы с гарантийными обязательствами.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>НУЖНА СРОЧНАЯ<br>ПОМОЩЬ МАСТЕРА?</h2>
+  <a href="tel:+87023522078" class="btn-dark">📞 Позвонить сейчас</a>
+</div>
+
+<!-- CONTACTS -->
+<section id="contacts">
+  <div class="section-tag">Связаться с нами</div>
+  <div class="section-title">КОНТАКТЫ</div>
+  <div class="contacts-grid">
+    <div>
+      <div class="contact-item fade-in">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Телефон</div>
+          <div class="contact-value"><a href="tel:+87023522078">8 702 352-20-78</a></div>
+        </div>
+      </div>
+      <div class="contact-item fade-in">
+        <div class="contact-icon">💬</div>
+        <div>
+          <div class="contact-label">WhatsApp / Telegram</div>
+          <div class="contact-value"><a href="https://wa.me/87023522078">8 702 352-20-78</a></div>
+        </div>
+      </div>
+      <div class="contact-item fade-in">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Режим работы</div>
+          <div class="contact-value">Пн–Вс, 8:00 – 22:00<br><span style="font-size:0.85rem;color:var(--fire)">Аварии — круглосуточно</span></div>
+        </div>
+      </div>
+      <div class="contact-item fade-in">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Район работы</div>
+          <div class="contact-value">Алматы и Алматинская область</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div style="margin-bottom:24px;font-weight:600;font-size:1.1rem;">Оставить заявку</div>
+      <div class="form-group">
+        <label>Ваше имя</label>
+        <input type="text" placeholder="Иван">
+      </div>
+      <div class="form-group">
+        <label>Телефон</label>
+        <input type="tel" placeholder="8 700 000-00-00">
+      </div>
+      <div class="form-group">
+        <label>Услуга</label>
+        <select>
+          <option value="">Выберите услугу...</option>
+          <option>Газовый котёл — ремонт</option>
+          <option>Газовый котёл — установка</option>
+          <option>Печь / камин</option>
+          <option>Кондиционер — установка</option>
+          <option>Кондиционер — ремонт / обслуживание</option>
+          <option>Сантехника</option>
+          <option>Электрика</option>
+          <option>Муж на час</option>
+          <option>Отопление</option>
+          <option>Двери / окна</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Комментарий</label>
+        <textarea placeholder="Опишите задачу..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()" style="width:100%;font-size:0.95rem;">Отправить заявку</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Мастер<span>Ком</span></div>
+  <div class="footer-copy">© 2025 МастерКом. Все права защищены.</div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80 * i);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function handleSubmit() {
+    const btn = event.target;
+    btn.textContent = '✓ Заявка отправлена!';
+    btn.style.background = '#2a7a2a';
+    setTimeout(() => {
+      btn.textContent = 'Отправить заявку';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
